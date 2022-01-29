@@ -1,0 +1,629 @@
+// ! config styling 
+// *************************
+
+$primary-color: rgb(44, 129, 182);
+$dark-color:rgba(0, 0, 0, 0.687);
+$light-color: #f4f4f4;
+$danger-color: rgb(226, 32, 32);
+$success-color:rgb(62, 163, 62);
+$max-width: 1100px;
+
+// function set textcolor based on bg
+@function set-text-color($color) {
+    @if(lightness($color) > 60) {
+        @return #333333;
+    }
+
+    @else {
+        @return #fff;
+    }
+}
+
+
+// mixins  set bg and color 
+
+@mixin set-background($color) {
+    background-color: $color;
+    color: set-text-color($color);
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: sans-serif;
+    font-size: 1em;
+    line-height: 1.6;
+    background-color: #fff;
+    color: #333;
+}
+
+
+a {
+
+    text-decoration: none;
+    color: $primary-color;
+
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    width: 100%;
+}
+
+// ! navbar 
+
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.7rem 2rem;
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+    top: 0;
+    border-bottom: solid 1px $primary-color;
+    opacity: 0.8;
+
+
+    ul {
+        display: flex;
+
+        a {
+            color: #fff;
+            padding: 0.45rem;
+            margin: 0 0.25rem;
+
+            &:hover {
+                color: $primary-color;
+            }
+        }
+    }
+}
+
+
+// ! utilty styling 
+// ********************************
+
+// text color
+.x-large {
+    font-size: 3rem;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+}
+
+.large {
+    font-size: 3rem;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+}
+
+.lead {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+}
+
+// backgrounds
+
+.bg {
+    &-primary {
+        @include set-background($primary-color);
+    }
+
+    &-light {
+        @include set-background($light-color);
+        border: #ccc 1px solid;
+    }
+
+    &-dark {
+        @include set-background($dark-color);
+    }
+
+    &-success {
+        @include set-background($success-color);
+    }
+
+    &-danger {
+        @include set-background($danger-color);
+    }
+
+    &-white {
+        @include set-background(#fff);
+        border: #ccc 1px solid;
+    }
+
+}
+
+// buttons 
+
+.btn {
+    display: inline-block;
+    background: $light-color;
+    color: #333;
+    padding: 0.4rem 1.3rem;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-right: 0.5rem;
+    outline: none;
+    transition: all 0.3s ease-in-out;
+
+    &.btn-primary {
+        @include set-background($primary-color);
+
+        &:hover {
+            background: lighten($primary-color, 5%);
+        }
+    }
+
+    &.btn-dark {
+        @include set-background(($dark-color));
+
+        &:hover {
+            background: lighten($dark-color, 5%);
+        }
+    }
+
+    &.btn-success {
+        @include set-background(($success-color));
+
+        &:hover {
+            background: lighten($success-color, 5%);
+        }
+    }
+
+    &.btn-danger {
+        @include set-background(($danger-color));
+
+        &:hover {
+            background: lighten($danger-color, 5%);
+        }
+    }
+
+    // regular color
+    &:hover {
+        background: lighten($dark-color, 20%);
+        color: #fff;
+    }
+}
+
+.dark-overlay {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.7);
+}
+
+// ! landing 
+
+.landing {
+
+    position: relative;
+    background-image: url('/img/showcase.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    width: 100%;
+    text-align: center;
+
+    &-inner {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: #fff;
+    }
+
+
+}
+
+
+
+// *************************************** register page 
+
+// TODO utility 
+.container {
+
+    max-width: $max-width;
+    margin: auto;
+    overflow: hidden;
+    padding: 0 2rem;
+    margin-top: 6rem;
+    margin-bottom: 3rem;
+}
+
+.text-primary {
+    color: $primary-color;
+}
+
+
+
+// TODO using mixins in margin
+$spaceamount : (1,
+    2,
+    3,
+    4,
+    5);
+
+@each $space in $spaceamount {
+
+    // All around margin 
+    .m-#{$space} {
+        margin: #{$space}rem;
+    }
+
+    // vertical margin 
+    .my-#{$space} {
+        margin: #{$space} rem 0;
+    }
+
+    //  All around padding 
+    .p-#{$space} {
+        padding: #{$space} rem;
+    }
+
+    // vartical padding 
+
+    .py-#{$space} {
+        padding: #{$space} rem 0;
+    }
+
+
+}
+
+//! form 
+
+.form {
+    &-group {
+        margin: 1.2rem 0;
+    }
+
+    &-text {
+        display: block;
+        margin-top: 0.3rem;
+        color: #333;
+    }
+
+    input[type='text'],
+    input[type='email'],
+    input[type='password'],
+    input[type='date'],
+    select,
+    textarea {
+        display: block;
+        width: 100%;
+        padding: 0.4rem;
+        font-size: 1.2rem;
+        border: 1px solid $primary-color;
+    }
+
+    input[type='submit'] {
+        font: inherit;
+    }
+
+    .social-input {
+        display: flex;
+
+        i {
+            padding: 0.5rem;
+            width: 4rem;
+
+            &.fa-twitter {
+                color: rgb(82, 194, 216);
+            }
+
+            &.fa-facebook {
+                color: rgb(92, 121, 228);
+            }
+
+            &.fa-instagram {
+                color: rgb(121, 98, 226);
+            }
+
+            &.fa-youtube {
+                color: rgb(197, 52, 52);
+            }
+
+            &.fa-linkedin {
+                color: rgb(20, 20, 127);
+            }
+        }
+    }
+
+}
+
+
+// ************************** login 
+// Alerts 
+
+.alert {
+    padding: 0.8rem;
+    margin: 1rem;
+    opacity: 0.9;
+    background: $light-color;
+    color: #333;
+
+    &.alert-primary {
+        @include set-background($primary-color);
+    }
+
+    &.alert-dark {
+        @include set-background($dark-color);
+    }
+
+    &.alert-success {
+        @include set-background($success-color);
+    }
+
+    &.alert-danger {
+        @include set-background($danger-color);
+    }
+}
+
+
+
+// ********************************  profiles 
+
+.round-img {
+    width: 200px;
+    border-radius: 50%;
+    border: 1px solid $primary-color;
+}
+
+// profiles 
+.profile {
+    display: grid;
+    grid-template-columns: 2fr 4fr 2fr;
+    grid-gap: 2rem;
+    align-items: center;
+    padding: 1rem;
+    line-height: 1.8;
+    margin-bottom: 1rem;
+}
+
+// **************************** profile 
+
+// ! line utility class 
+.line {
+    height: 1px;
+    background: #ccc;
+    margin: 1.5rem 0;
+}
+
+.profile-grid {
+
+    display: grid;
+    grid-template-areas:
+        'top top'
+        'about about'
+        'exp edu'
+        'github github';
+    grid-gap: 1rem;
+
+    .profile-top {
+        grid-area: top;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 20px 20px;
+
+        img {
+            width: 250px;
+        }
+
+        .icons a {
+            color: #fff;
+            margin: 0 0.3rem;
+
+            &:hover {
+                color: $dark-color;
+            }
+        }
+    }
+
+    .profile-about {
+        grid-area: about;
+        text-align: center;
+
+        .skills {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+    }
+
+    .profile-exp {
+        grid-area: exp;
+        padding: 20px;
+    }
+
+    .profile-edu {
+        grid-area: edu;
+        padding: 20px;
+    }
+
+    .profile-exp>div,
+    .profile-edu>div {
+        &>div {
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: #ccc 1px dotted;
+
+        }
+
+        &:last-child {
+            border: none;
+        }
+
+        p {
+            margin: 0.5rem 0;
+        }
+    }
+
+    .profile-github {
+        grid-area: github;
+
+
+        .repo {
+            display: flex;
+            padding: 20px;
+
+            &>div:first-child {
+                flex: 7;
+                flex-basis: 70%;
+            }
+
+            &>div:last-child {
+                flex: 3;
+                flex-basis: 20%;
+            }
+
+        }
+    }
+}
+
+
+
+// ! badged utility 
+
+.badge {
+    font-size: 0.8rem;
+    padding: 0.1rem;
+    text-align: center;
+    margin: 0.3rem;
+    background: $light-color;
+    color: #333;
+
+    &.badge-primary {
+        @include set-background($primary-color);
+    }
+
+    &.badge-dark {
+        @include set-background($dark-color);
+    }
+
+    &.badge-success {
+        @include set-background($success-color);
+    }
+
+    &.badge-danger {
+        @include set-background($danger-color);
+    }
+}
+
+
+// *********************** Dashboard page 
+
+// ! utility 
+
+.table {
+
+    th,
+    td {
+        padding: 1rem;
+        text-align: left;
+    }
+
+    th {
+        background: $light-color;
+    }
+}
+
+
+
+
+
+// **************** media 
+
+@media (max-width: 700px) {
+    .hide-sm {
+        display: none;
+    }
+
+    .container {
+        margin-top: 8rem;
+    }
+
+    // text
+
+    .x-large {
+        font-size: 3rem;
+    }
+
+    .large {
+        font-size: 2rem;
+    }
+
+    .lead {
+        font-size: 1rem;
+    }
+
+    // navbar 
+    .navbar {
+        display: block;
+        text-align: center;
+
+        ul {
+            text-align: center;
+            justify-content: center;
+        }
+
+        h2 {
+            margin-bottom: 1rem;
+        }
+
+    }
+
+    .dash-buttons a {
+        display: block;
+        width: 100%;
+        margin-bottom: 0.2rem;
+    }
+
+    // * profile 
+    .profile {
+        grid-template-columns: 1fr;
+        text-align: center;
+
+        ul {
+            display: none;
+        }
+    }
+
+    .profile-grid {
+        grid-template-areas:
+            'top'
+            'about'
+            'exp'
+            'edu'
+            'github'
+        ;
+    }
+
+    .profile-about {
+        .skills {
+            flex-direction: column;
+        }
+    }
+
+    .post {
+        grid-template-columns: 1fr;
+
+        a,
+        button {
+            padding: 0.3rem 0.4rem;
+        }
+    }
+}
